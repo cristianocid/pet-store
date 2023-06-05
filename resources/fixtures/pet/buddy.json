@@ -1,0 +1,18 @@
+{
+    "id": 313131,
+    "category": {
+      "id": 0,
+      "name": "Dog"
+    },
+    "name": "Cid Shadow",
+    "photoUrls": [
+      "string"
+    ],
+    "tags": [
+      {
+        "id": 0,
+        "name": "string"
+      }
+    ],
+    "status": "available"
+  }
