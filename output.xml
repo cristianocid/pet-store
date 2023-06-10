@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.0.2 (Python 3.11.0 on win32)" generated="20230609 21:57:00.949" rpa="false" schemaversion="3">
+<suite id="s1" name="Get User" source="c:\qaninja\pet-store\tests\api\user\get_user.robot">
+<test id="s1-t1" name="Get User" line="7">
+<kw name="Get Json" library="helpers">
+<var>${origin}</var>
+<arg>/user/user.json</arg>
+<kw name="Get File" library="OperatingSystem">
+<var>${json_file}</var>
+<arg>${EXECDIR}/resources/fixtures/${file_name}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<msg timestamp="20230609 21:57:01.096" level="INFO" html="true">Getting file '&lt;a href="file://C:\qaninja\pet-store\resources\fixtures\user\user.json"&gt;C:\qaninja\pet-store\resources\fixtures\user\user.json&lt;/a&gt;'.</msg>
+<msg timestamp="20230609 21:57:01.098" level="INFO">${json_file} = {
+    "id": 31,
+    "username": "Dang3r",
+    "firstName": "Cristiano",
+    "lastName": "Bonfim",
+    "email": "cris@gmail.com",
+    "password": "12345678",
+    "phone": "21971848858",
+    "userStatus...</msg>
+<status status="PASS" starttime="20230609 21:57:01.095" endtime="20230609 21:57:01.098"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${json_dict}</var>
+<arg>json.loads($json_file)</arg>
+<arg>json</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230609 21:57:01.101" level="INFO">${json_dict} = {'id': 31, 'username': 'Dang3r', 'firstName': 'Cristiano', 'lastName': 'Bonfim', 'email': 'cris@gmail.com', 'password': '12345678', 'phone': '21971848858', 'userStatus': 1}</msg>
+<status status="PASS" starttime="20230609 21:57:01.098" endtime="20230609 21:57:01.101"/>
+</kw>
+<msg timestamp="20230609 21:57:01.101" level="INFO">${origin} = {'id': 31, 'username': 'Dang3r', 'firstName': 'Cristiano', 'lastName': 'Bonfim', 'email': 'cris@gmail.com', 'password': '12345678', 'phone': '21971848858', 'userStatus': 1}</msg>
+<status status="PASS" starttime="20230609 21:57:01.095" endtime="20230609 21:57:01.102"/>
+</kw>
+<kw name="Get Pet" library="services">
+<var>${resp}</var>
+<arg>${origin['username']}</arg>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>pet_store-api</arg>
+<arg>${base_api_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230609 21:57:01.103" level="INFO">Creating Session using : alias=pet_store-api, url=https://petstore.swagger.io/v2, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20230609 21:57:01.103" endtime="20230609 21:57:01.104"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{headers}</var>
+<arg>Content-Type=Application/json</arg>
+<arg>accept=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230609 21:57:01.105" level="INFO">&amp;{headers} = { Content-Type=Application/json | accept=application/json }</msg>
+<status status="PASS" starttime="20230609 21:57:01.104" endtime="20230609 21:57:01.105"/>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${resp}</var>
+<arg>pet_store-api</arg>
+<arg>/pet/${pet_id}</arg>
+<arg>headers=${headers}</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<msg timestamp="20230609 21:57:01.105" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20230609 21:57:01.738" level="INFO">GET Request : url=https://petstore.swagger.io/v2/pet/Dang3r 
+ path_url=/v2/pet/Dang3r 
+ headers={'User-Agent': 'python-requests/2.30.0', 'Accept-Encoding': 'gzip, deflate', 'accept': 'application/json', 'Connection': 'keep-alive', 'Content-Type': 'Application/json'} 
+ body=None 
+ </msg>
+<msg timestamp="20230609 21:57:01.738" level="INFO">GET Response : url=https://petstore.swagger.io/v2/pet/Dang3r 
+ status=404, reason=Not Found 
+ headers={'Date': 'Sat, 10 Jun 2023 00:57:01 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"code":404,"type":"unknown","message":"java.lang.NumberFormatException: For input string: \"Dang3r\""} 
+ </msg>
+<msg timestamp="20230609 21:57:01.739" level="INFO">C:\Python311\Lib\site-packages\urllib3\connectionpool.py:1095: InsecureRequestWarning: Unverified HTTPS request is being made to host 'petstore.swagger.io'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg timestamp="20230609 21:57:01.739" level="INFO">${resp} = &lt;Response [404]&gt;</msg>
+<status status="PASS" starttime="20230609 21:57:01.105" endtime="20230609 21:57:01.740"/>
+</kw>
+<msg timestamp="20230609 21:57:01.740" level="INFO">${resp} = &lt;Response [404]&gt;</msg>
+<status status="PASS" starttime="20230609 21:57:01.102" endtime="20230609 21:57:01.740"/>
+</kw>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${resp}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<msg timestamp="20230609 21:57:01.741" level="FAIL">Url: https://petstore.swagger.io/v2/pet/Dang3r Expected status: 404 != 200</msg>
+<status status="FAIL" starttime="20230609 21:57:01.740" endtime="20230609 21:57:01.743"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${resp.json()['username']}</arg>
+<arg>${origin['username']}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" starttime="20230609 21:57:01.743" endtime="20230609 21:57:01.743"/>
+</kw>
+<status status="FAIL" starttime="20230609 21:57:01.094" endtime="20230609 21:57:01.744">Url: https://petstore.swagger.io/v2/pet/Dang3r Expected status: 404 != 200</status>
+</test>
+<status status="FAIL" starttime="20230609 21:57:00.954" endtime="20230609 21:57:01.745"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="1" skip="0" id="s1" name="Get User">Get User</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20230609 21:57:01.105" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+</errors>
+</robot>

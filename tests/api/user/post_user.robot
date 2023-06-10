@@ -6,10 +6,9 @@ Library    OperatingSystem
 Library    SeleniumLibrary
 
 *** Test Cases ***
-New Pet
-    ${payload}=         Get Json    /pet/buddy.json
+New User
+    ${payload}=         Get Json    /user/user.json
 
-    #Delete Customer     ${payload['cpf']}
-    ${resp}=            Post Pet    ${payload}
+    ${resp}=            Post User    ${payload}
 
     Status Should Be    200    ${resp}

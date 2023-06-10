@@ -5,7 +5,7 @@ Resource    ../../../resources/fixtures/pet/buddy.json
 
 *** Test Cases ***
 Delete Pet
-    ${origin}=    Get Json    buddy.json
+    ${origin}=    Get Json    /pet/buddy.json
 
     ${pet_id}=   Convert To String    ${origin['id']} 
 

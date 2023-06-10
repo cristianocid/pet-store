@@ -9,7 +9,7 @@ Library    Collections
 *** Test Cases ***
 Update a Pet
     # Pet origem
-    ${payload}=         Get Json    buddy.json
+    ${payload}=         Get Json    /pet/buddy.json
     
     # Pega o id do Pet
     ${user_id}=         Convert To String    ${payload['id']}

@@ -4,12 +4,12 @@ Resource    ../../../resources/services.robot
 
 
 *** Test Cases ***
-Get Pet
-    ${origin}=    Get Json    /pet/buddy.json
+Get Store
+    ${origin}=    Get Json    /store/buddy.json
 
-    ${pet_id}=   Convert To String    ${origin['id']} 
+    ${id}=   Convert To String    ${origin['id']} 
 
-    ${resp}=      Get Pet    ${pet_id}
+    ${resp}=      Get Pet    ${id}
 
     Status Should Be    200                      ${resp}
     Should Be Equal     ${resp.json()['id']}    ${origin['id']}
